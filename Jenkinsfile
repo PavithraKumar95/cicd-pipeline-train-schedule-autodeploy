@@ -37,13 +37,13 @@ pipeline {
                 }
             }
         }
-         stage('DeployToProduction') {
-             steps {
-                    sh "kubectl apply -f 'train-schedule-kube-canary.yml'"
-                    
-                    sh "kubectl apply -f train-schedule-kube.yml"
-            }
-            }
-           }
+        stage('DeployToProduction') {
+            steps {
+               sh "kubectl apply -f 'train-schedule-kube-canary.yml'"
+               sh "kubectl apply -f train-schedule-kube.yml"
 
+            }
+        }
+    }
+}
 
