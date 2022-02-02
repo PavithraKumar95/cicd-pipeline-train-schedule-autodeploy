@@ -5,6 +5,11 @@ pipeline {
         DOCKER_IMAGE_NAME = "pavithrakumar/train-schedule"
     }
     stages {
+        stage("git checkout"){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ROYNITISH/cicd-pipeline-train-schedule-autodeploy.git']]])
+            }
+            }
         stage('Build') {
             steps {
                 echo 'Running build automation'
@@ -13,9 +18,6 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            when {
-                branch 'master'
-            }
             steps {
                 script {
                     app = docker.build(DOCKER_IMAGE_NAME)
